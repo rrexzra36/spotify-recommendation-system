@@ -36,7 +36,7 @@ Untuk mencapai tujuan yang ditetapkan, penelitian ini mengadopsi beberapa langka
 - Melakukan evaluasi model untuk mengukur performa model dengan menggunakan metrik evaluasi yang telah ditetapkan. Evaluasi ini bertujuan untuk menentukan seberapa baik model yang telah dikembangkan dalam memberikan rekomendasi musik berdasarkan genre, sehingga dapat diidentifikasi model machine learning yang paling efektif untuk digunakan dalam memberikan rekomendasi musik.
 ## Data Understanding
 <p align="center">
-  <img src="https://raw.githubusercontent.com/rrexzra36/anemia-predictive-analytics/refs/heads/main/images/dataset.png" />
+  <img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/dataset.png" />
 </p>
 
 Dataset yang digunakan dalam proyek machine learning ini merupakan dataset anemia yang terdiri dari 2000 entri data atau record. Dataset ini bersifat open-source, yang berarti tersedia secara bebas untuk digunakan oleh publik, dan telah dipublikasikan oleh Mark Korveha melalui platform Kaggle dengan judul [Top Hits Spotify from 2000-2019](https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019). Dataset ini berisi statistik audio dari 2000 lagu teratas di Spotify yang dirilis antara tahun 2000 hingga 2019. Dalam dataset ini, terdapat sekitar 18 kolom yang masing-masing memberikan informasi detail mengenai lagu-lagu tersebut serta berbagai karakteristiknya. Setiap kolom dirancang untuk menjelaskan aspek tertentu dari lagu, mulai dari durasi, genre, popularitas, hingga fitur-fitur teknis lainnya yang mencakup elemen musik seperti tempo, kunci, dan tingkat energi.
@@ -63,6 +63,31 @@ Statistik audio yang terdapat dalam dataset ini sangat berguna bagi para penelit
 - **tempo**: Tempo keseluruhan yang diperkirakan dari sebuah lagu dalam ketukan per menit (BPM). Dalam terminologi musik, tempo adalah kecepatan atau ritme dari sebuah karya dan berasal langsung dari rata-rata durasi ketukan.
 - **genre**: Genre dari lagu tersebut.
 
+### Hasil Visualiasi dan Analisis Data
+1. **Univariate Analysis**
+
+<p align="center">
+  <img src="asd" />
+</p>
+
+Visualisasi data menunjukkan bahwa jumlah lagu per tahun meningkat tajam dari tahun 1999 hingga mencapai puncaknya pada tahun 2001. Setelah itu, jumlah lagu yang dirilis per tahun relatif stabil antara 80 hingga 100 lagu dari tahun 2002 hingga 2017. Setelah 2017, terlihat sedikit penurunan, dengan penurunan drastis pada tahun 2020, yang mencatat jumlah lagu paling sedikit sepanjang periode yang ditampilkan.
+
+2. **Bivariate Analysis**
+
+<p align="center">
+  <img src="asd" />
+</p>
+
+Visualisasi ini menunjukkan bahwa tidak terdapat hubungan yang kuat antara popularitas lagu dengan fitur audio seperti danceability, energy, dan tempo. Sebagian besar lagu, terlepas dari variasi dalam fitur-fitur tersebut, memiliki tingkat popularitas yang serupa, berkisar antara 40 hingga 80. Oleh karena itu, fitur-fitur audio ini mungkin tidak cukup untuk memprediksi popularitas lagu secara akurat dalam sistem rekomendasi. Pendekatan yang lebih efektif mungkin memerlukan penggunaan faktor lain, seperti preferensi pengguna, lirik, atau metadata lainnya, untuk meningkatkan relevansi rekomendasi.
+
+
+3. **Multivariate Analysis**
+
+<p align="center">
+  <img src="asd" />
+</p>
+
+Visualisasi korelasi matriks fitur dalam konteks sistem rekomendasi musik, terlihat bahwa fitur seperti energy dan loudness memiliki korelasi positif kuat, menunjukkan lagu energik cenderung lebih keras. Sebaliknya, ada korelasi negatif antara acousticness dan energy, sehingga lagu akustik cenderung memiliki energi rendah. Selain itu, lagu yang lebih ceria (valence) sering kali lebih mudah untuk menari (danceability). Korelasi ini membantu sistem rekomendasi musik dalam menyesuaikan lagu berdasarkan preferensi pengguna, seperti memilih lagu energik atau ceria yang cocok untuk suasana tertentu.
 ## Data Preparation
 Persiapan data adalah tahap penting dalam mengolah data mentah menjadi format yang sesuai untuk analisis atau pemrosesan lebih lanjut. Dalam proyek ini, beberapa teknik dan metode yang diterapkan dalam proses persiapan data adalah sebagai berikut:
 
@@ -81,7 +106,11 @@ Pada proyek ini, pendekatan yang dipakai untuk mengembangkan model dalam sistem 
 ### Content Based Filtering
 Content Based Filtering adalah metode yang digunakan dalam sistem rekomendasi dan analisis data dengan fokus pada karakteristik atau konten dari item yang ingin direkomendasikan atau dianalisis. Pendekatan ini memanfaatkan atribut atau fitur dari item untuk menentukan kesamaan antara item yang ada dan preferensi pengguna. Dengan kata lain, sistem ini merekomendasikan item berdasarkan kesamaan antara konten item yang sudah diketahui pengguna dan konten item yang akan direkomendasikan.
 
-<p align='center'><img src="https://github.com/SyarifulMsth/Spotify-Music-Recommendation-System-/blob/main/images/content_based_filltering.png?raw=true"  width="500"></p>
+<p align='center'><img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/content-based-filtering.png"  width="500"></p>
+
+<div align="center">
+    <strong>Tabel 1.</strong> Kekurangan dan Kelibihan Content Base Filtering
+</div>
 
 <div align="center">
 
@@ -94,12 +123,71 @@ Content Based Filtering adalah metode yang digunakan dalam sistem rekomendasi da
 
 </div>
 
+### Implementasi
+Tahapan pemodelan menggunakan algoritma Content Based Filtering dalam proyek ini terdiri dari beberapa langkah, yaitu:
+1. **Vektorisasi dengan TF-IDF**
+Pada tahap ini, data yang telah dibersihkan dan siap untuk digunakan akan dikonversi menjadi format vektor dengan memanfaatkan fungsi `TfidfVectorizer()` dari library scikit-learn. Proses ini berhasil mengidentifikasi representasi fitur melalui fungsi `TfidfVectorizer()`.
+
+2. **Perhitungan Derajat Kesamaan (`Cosine Similarity`)**
+Di tahap ini, dilakukan penghitungan derajat kesamaan menggunakan fungsi `cosine_similarity` pada dataframe `tfidf_matrix` yang telah diperoleh sebelumnya. Proses ini bertujuan untuk menghitung kesamaan (similarity) antara musik atau lagu berdasarkan genre.
+
+3. **Pembuatan Rekomendasi Musik atau Lagu**
+Pada tahap ini, fungsi `recommend_song` dibuat dengan menggunakan argpartition. Fungsi ini mengambil sejumlah nilai k tertinggi dari data kesamaan (dalam proyek ini: `cosine_sim_df`). Selanjutnya, data diurutkan dari tingkat kesamaan tertinggi hingga terendah dan dimasukkan ke dalam variabel closest. Untuk memastikan bahwa lagu yang dicari tidak muncul dalam daftar rekomendasi, lagu tersebut dihapus dari hasil akhir.
+
+### Output
+Proses pengembangan model machine learning untuk rekomendasi musik atau lagu telah berhasil diselesaikan. Langkah berikutnya adalah memeriksa hasil rekomendasi yang dihasilkan oleh model tersebut.
+
+Pada kasus ini, akan dilakukan pencarian lagu-lagu yang serupa dengan lagu **"Excuse Me Miss"** milik **JAY-Z**, yang memiliki genre Pop.
+
+<div align="center">
+    <strong>Tabel 2.</strong> Informasi musik atau lagu untuk uji coba
+</div>
+<div align="center">
+
+| artist       | song       | year | popularity | genre |
+|--------------|------------|------|------------|-------|
+| JAY-Z        | Excuse Me Miss | 2002 | 56         | hip-hop   |
+
+</div>
+
+<div align="center">
+    <strong>Tabel 3.</strong> Hasil Rekomendasi Musik Berdasarkan Genre 
+</div>
+
+<div align="center">
+
+|  index  | song                  | genre     |
+|---------|-----------------------|-----------|
+| 0       | Circles               | hip-hop   |
+| 1       | Titanium (feat. Sia)  | hip-hop   |
+| 2       | Slow Jamz             | hip-hop   |
+| 3       | Lost                  | hip-hop   |
+| 4       | My Place              | hip-hop   |
+
+</div>
+
+
+
+
 ## Evaluation
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
-**---Ini adalah bagian akhir laporan---**
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+Proyek machine learning ini memanfaatkan algoritma Content Based Filtering, dan untuk evaluasi performa model, metrik yang digunakan adalah Precision. Precision mengukur seberapa relevan rekomendasi yang diberikan oleh model dan dapat dinyatakan dengan rumus sebagai berikut:
+
+\[
+\text{Precision} = \frac{r}{i}
+\]
+
+Di mana:
+- \( r \) adalah jumlah rekomendasi yang relevan,
+- \( i \) adalah total rekomendasi yang diberikan.
+
+Berdasarkan pengujian yang dilakukan di bagian Hasil, diperoleh 5 rekomendasi lagu berdasarkan genre. Jika dilakukan perhitungan dengan rumus di atas, maka nilai Precision yang dihasilkan adalah:
+
+\[
+\text{Precision} = \frac{5}{5} = 100\%
+\]
+
+
+## Conclusion
+Pengembangan model machine learning untuk rekomendasi musik atau lagu menggunakan algoritma Content Based Filtering melalui beberapa tahapan yang bersifat iteratif. Tahapan tersebut dimulai dari pemahaman bisnis (business understanding), pemahaman data (data understanding), hingga proses pemodelan (modelling) dan evaluasi (evaluation). Dalam proyek ini, metrik evaluasi yang digunakan adalah precision, yang dipilih berdasarkan konteks data, rumusan masalah, dan solusi yang diterapkan. Precision digunakan untuk mengukur seberapa akurat prediksi atau rekomendasi yang diberikan oleh model.
+
+Setelah melalui tahapan evaluasi, model rekomendasi musik berdasarkan genre menunjukkan hasil yang memuaskan, dengan nilai precision mencapai 100%. Model ini, yang dikembangkan dengan algoritma `Content Based Filtering`, dinilai berhasil menjawab pertanyaan-pertanyaan masalah yang telah dirumuskan serta mencapai tujuan proyek. Dengan adanya model ini, diharapkan sistem rekomendasi musik berdasarkan genre dapat membantu layanan aplikasi musik online memberikan rekomendasi yang lebih relevan kepada penggunanya.
