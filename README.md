@@ -177,8 +177,8 @@ Proyek machine learning ini memanfaatkan algoritma Content Based Filtering, dan 
 \]
 
 Di mana:
-- \( r \) adalah jumlah rekomendasi yang relevan,
-- \( i \) adalah total rekomendasi yang diberikan.
+- [![\\ \( r \)](https://latex.codecogs.com/svg.latex?%5C%5C%20%5C(%20r%20%5C))](#_) adalah jumlah rekomendasi yang relevan,
+- [![\\ \( i \)](https://latex.codecogs.com/svg.latex?%5C%5C%20%5C(%20i%20%5C))](#_) adalah total rekomendasi yang diberikan.
 
 Berdasarkan pengujian yang dilakukan di bagian Hasil, diperoleh 5 rekomendasi lagu berdasarkan genre. Jika dilakukan perhitungan dengan rumus di atas, maka nilai Precision yang dihasilkan adalah:
 

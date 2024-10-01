@@ -335,5 +335,5 @@ based_songs
 
 data[data.song.eq('Excuse Me Miss')]
 
-# Mendapatkan rekomendasi lagu yang mirip dengan lagu Taylor Swift - Love Story
+# Mendapatkan rekomendasi lagu yang mirip dengan lagu Jay-Z - Excuse me miss
 recommend_song('Excuse Me Miss')
