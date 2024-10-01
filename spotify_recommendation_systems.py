@@ -168,6 +168,31 @@ sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
 plt.title('Multivariate Analysis: Correlation Matrix of Features', size=16)
 plt.show()
 
+"""### Outlier and Distribution Analysis"""
+
+# Mengatur style visualisasi
+sns.set(style="whitegrid")
+
+# Visualisasi boxplot untuk semua kolom numerik
+plt.figure(figsize=(15, 10))
+
+# Get numerical columns from the DataFrame
+numerical_columns = df.select_dtypes(include=['number']).columns # Define numerical_columns
+
+# Adjust the grid layout to accommodate all numerical columns
+num_rows = 4  # Adjust as needed
+num_cols = 4  # Adjust as needed
+
+plt.suptitle('Distribution Analysis and Outlier Detection', size=16)
+
+for i, col in enumerate(numerical_columns, 1):
+    plt.subplot(num_rows, num_cols, i)  # Mengatur grid 3x4
+    sns.boxplot(x=df[col])
+    plt.title(f'Boxplot {col}')
+
+plt.tight_layout()
+plt.show()
+
 """## D. Data Preparation
 Data preparation sangat penting dalam pengembangan model machine learning, karena proses ini mencakup transformasi data yang diperlukan agar pemodelan dapat berlangsung dengan optimal.
 
