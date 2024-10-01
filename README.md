@@ -88,6 +88,15 @@ Visualisasi ini menunjukkan bahwa tidak terdapat hubungan yang kuat antara popul
 </p>
 
 Visualisasi korelasi matriks fitur dalam konteks sistem rekomendasi musik, terlihat bahwa fitur seperti energy dan loudness memiliki korelasi positif kuat, menunjukkan lagu energik cenderung lebih keras. Sebaliknya, ada korelasi negatif antara acousticness dan energy, sehingga lagu akustik cenderung memiliki energi rendah. Selain itu, lagu yang lebih ceria (valence) sering kali lebih mudah untuk menari (danceability). Korelasi ini membantu sistem rekomendasi musik dalam menyesuaikan lagu berdasarkan preferensi pengguna, seperti memilih lagu energik atau ceria yang cocok untuk suasana tertentu.
+
+4. **Outlier & Distribution Analysis**
+
+<p align="center">
+  <img src="asd" />
+</p>
+
+Dari hasil analisis distribusi dan deteksi outlier, dapat disimpulkan bahwa sebagian besar fitur dalam dataset memiliki distribusi yang seimbang, dengan rentang nilai yang tidak terlalu ekstrem. Namun, terdapat beberapa fitur yang menunjukkan keberadaan outlier yang signifikan, seperti durasi, popularitas, speechiness, dan instrumentalness. Hal ini mengindikasikan adanya variasi yang cukup tinggi di beberapa lagu, terutama terkait elemen popularitas, vokal, dan instrumental. Secara umum, distribusi fitur seperti danceability, energy, tempo, dan valence menunjukkan variasi yang lebih terkendali. Adanya outlier ini penting untuk dipertimbangkan, terutama jika analisis lanjutan seperti modeling atau clustering dilakukan, karena dapat mempengaruhi hasil dan interpretasi lebih lanjut.
+
 ## Data Preparation
 Persiapan data adalah tahap penting dalam mengolah data mentah menjadi format yang sesuai untuk analisis atau pemrosesan lebih lanjut. Dalam proyek ini, beberapa teknik dan metode yang diterapkan dalam proses persiapan data adalah sebagai berikut:
 
@@ -100,13 +109,18 @@ Data duplikat juga merupakan masalah yang sering ditemui dalam industri. Masalah
 3. **Feature Engineering**
 Merupakan proses untuk mengembangkan dan memilih atribut atau fitur yang akan digunakan dalam analisis data atau dalam pembuatan model *machine learning*. Dalam proyek ini, tahap rekayasa fitur dilakukan pada kolom genre. Terdapat beberapa entri dalam kolom genre yang memiliki lebih dari satu genre. Oleh karena itu, perlu dilakukan penanganan dengan memilih genre dari kategori pertama. Hal ini bertujuan untuk memudahkan pengembangan model dan memastikan model yang dihasilkan memiliki performa yang baik.
 
+4. **Vektorisasi dengan TF-IDF**
+Pada tahap ini, data yang telah dibersihkan dan siap untuk digunakan akan dikonversi menjadi format vektor dengan memanfaatkan fungsi `TfidfVectorizer()` dari library scikit-learn. Proses ini berhasil mengidentifikasi representasi fitur melalui fungsi `TfidfVectorizer()`.
+
 ## Modeling
 Pada proyek ini, pendekatan yang dipakai untuk mengembangkan model dalam sistem rekomendasi adalah `Content-Based Filtering`.
 
 ### Content Based Filtering
 Content Based Filtering adalah metode yang digunakan dalam sistem rekomendasi dan analisis data dengan fokus pada karakteristik atau konten dari item yang ingin direkomendasikan atau dianalisis. Pendekatan ini memanfaatkan atribut atau fitur dari item untuk menentukan kesamaan antara item yang ada dan preferensi pengguna. Dengan kata lain, sistem ini merekomendasikan item berdasarkan kesamaan antara konten item yang sudah diketahui pengguna dan konten item yang akan direkomendasikan.
 
-<p align='center'><img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/content-based-filtering.png"  width="500"></p>
+<p align='center'>
+<img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/content-based-filtering.png"  width="500">
+</p>
 
 <div align="center">
     <strong>Tabel 1.</strong> Kekurangan dan Kelibihan Content Base Filtering
@@ -124,15 +138,34 @@ Content Based Filtering adalah metode yang digunakan dalam sistem rekomendasi da
 </div>
 
 ### Implementasi
-Tahapan pemodelan menggunakan algoritma Content Based Filtering dalam proyek ini terdiri dari beberapa langkah, yaitu:
-1. **Vektorisasi dengan TF-IDF**
-Pada tahap ini, data yang telah dibersihkan dan siap untuk digunakan akan dikonversi menjadi format vektor dengan memanfaatkan fungsi `TfidfVectorizer()` dari library scikit-learn. Proses ini berhasil mengidentifikasi representasi fitur melalui fungsi `TfidfVectorizer()`.
+Tahapan pemodelan menggunakan algoritma `Content Based Filtering` dalam proyek ini terdiri dari beberapa langkah, yaitu:
 
-2. **Perhitungan Derajat Kesamaan (`Cosine Similarity`)**
-Di tahap ini, dilakukan penghitungan derajat kesamaan menggunakan fungsi `cosine_similarity` pada dataframe `tfidf_matrix` yang telah diperoleh sebelumnya. Proses ini bertujuan untuk menghitung kesamaan (similarity) antara musik atau lagu berdasarkan genre.
+1. **Data Prepatation**
+Pada tahap sebelumnya, data telah melalui proses pembersihan, dan langkah berikutnya adalah menyiapkan dataframe yang sudah bebas dari kesalahan atau anomali untuk digunakan dalam tahap persiapan data (data preparation). Proses ini mencakup penghapusan data yang tidak relevan, penanganan nilai yang hilang, serta normalisasi atau standarisasi agar data siap digunakan untuk analisis lebih lanjut atau pelatihan model machine learning.
 
-3. **Pembuatan Rekomendasi Musik atau Lagu**
+2. **TF-IDF Vectorizer**
+Proses term frequency-inverse document frequency (`TF-IDF`) digunakan untuk mengidentifikasi representasi kata-kata penting dalam kolom genre. Dalam proyek ini, proses vektorisasi dilakukan menggunakan fungsi `TfidfVectorizer()` yang tersedia di library scikit-learn. Berikut adalah hasil `TF-IDF` dalam bentuk matriks, di mana matriks tersebut memperlihatkan hubungan antara musik dan genre yang terkait.
+<p align='center'>
+<img src="asd"  width="500">
+</p>
+
+3. **Perhitungan Derajat Kesamaan (`Cosine Similarity`)**
+Di tahap ini, dilakukan penghitungan derajat kesamaan menggunakan fungsi `cosine_similarity` pada dataframe `tfidf_matrix` yang telah diperoleh sebelumnya. Proses ini bertujuan untuk menghitung kesamaan (*similarity*) antara musik atau lagu berdasarkan genre.
+<p align='center'>
+<img src="asd"  width="500">
+</p>
+
+4. **Create Custom Functions**
+Langkah terakhir adalah membangun fungsi kustom untuk menghasilkan rekomendasi berdasarkan data input yang diinginkan. Fungsi ini bekerja dengan mengambil nilai similarity dari musik yang ingin dicari, kemudian memasukkan musik yang paling mirip ke dalam variabel closest. Parameter `N` ditentukan untuk menghasilkan `top-N recommendation` berdasarkan tingkat kesamaan tertinggi. Musik yang dicari akan dihapus dari daftar agar tidak muncul dalam rekomendasi. Pada langkah akhir, return digunakan untuk mengembalikan hasil rekomendasi dalam bentuk dataframe, di mana nilai yang dikembalikan adalah judul-judul musik berdasarkan tingkat similarity.
+<p align='center'>
+<img src="asd"  width="500">
+</p>
+
+5. **Pembuatan Rekomendasi Musik atau Lagu**
 Pada tahap ini, fungsi `recommend_song` dibuat dengan menggunakan argpartition. Fungsi ini mengambil sejumlah nilai k tertinggi dari data kesamaan (dalam proyek ini: `cosine_sim_df`). Selanjutnya, data diurutkan dari tingkat kesamaan tertinggi hingga terendah dan dimasukkan ke dalam variabel closest. Untuk memastikan bahwa lagu yang dicari tidak muncul dalam daftar rekomendasi, lagu tersebut dihapus dari hasil akhir.
+<p align='center'>
+<img src="asd"  width="500">
+</p>
 
 ### Output
 Proses pengembangan model machine learning untuk rekomendasi musik atau lagu telah berhasil diselesaikan. Langkah berikutnya adalah memeriksa hasil rekomendasi yang dihasilkan oleh model tersebut.
@@ -170,15 +203,16 @@ Pada kasus ini, akan dilakukan pencarian lagu-lagu yang serupa dengan lagu **"Ex
 
 
 ## Evaluation
-Proyek machine learning ini memanfaatkan algoritma Content Based Filtering, dan untuk evaluasi performa model, metrik yang digunakan adalah Precision. Precision mengukur seberapa relevan rekomendasi yang diberikan oleh model dan dapat dinyatakan dengan rumus sebagai berikut:
+### Perhitungan Evaluasi
+Proyek machine learning ini memanfaatkan algoritma `Content Based Filtering`, dan untuk evaluasi performa model, metrik yang digunakan adalah Precision. Precision mengukur seberapa relevan rekomendasi yang diberikan oleh model dan dapat dinyatakan dengan rumus sebagai berikut:
 
 \[
 \text{Precision} = \frac{r}{i}
 \]
 
 Di mana:
-- [![\\ \( r \)](https://latex.codecogs.com/svg.latex?%5C%5C%20%5C(%20r%20%5C))](#_) adalah jumlah rekomendasi yang relevan,
-- [![\\ \( i \)](https://latex.codecogs.com/svg.latex?%5C%5C%20%5C(%20i%20%5C))](#_) adalah total rekomendasi yang diberikan.
+- \(( r )\) adalah jumlah rekomendasi yang relevan.
+- \(( i )\) adalah total rekomendasi yang diberikan.
 
 Berdasarkan pengujian yang dilakukan di bagian Hasil, diperoleh 5 rekomendasi lagu berdasarkan genre. Jika dilakukan perhitungan dengan rumus di atas, maka nilai Precision yang dihasilkan adalah:
 
@@ -186,8 +220,18 @@ Berdasarkan pengujian yang dilakukan di bagian Hasil, diperoleh 5 rekomendasi la
 \text{Precision} = \frac{5}{5} = 100\%
 \]
 
+### Hasil Evluasi:
+1. Algoritma `content-based filtering` dengan `TfidfVectorizer` dan `cosine similarity` merupakan pendekatan paling efektif dalam proyek ini, dengan kemampuan untuk memberikan rekomendasi musik berdasarkan genre yang diinginkan oleh pengguna.
+2. Penelitian ini berhasil menjawab problem statement dengan mengembangkan model machine learning yang dapat merekomendasikan musik berdasarkan genre, menggunakan representasi fitur musik dengan TfidfVectorizer dan mengukur kesamaan antar lagu dengan `cosine similarity`. Proses pengembangan model mencakup *data loading*, eksplorasi data (EDA), pemodelan, dan evaluasi kinerja model yang tepat sesuai dengan tujuan rekomendasi musik berbasis genre.
+
+3. Penelitian ini juga berhasil mencapai seluruh tujuan yang diharapkan, yaitu:
+    - Memahami penerapan algoritma machine learning dalam memberikan rekomendasi musik.
+    - Mengembangkan model rekomendasi musik yang sesuai dengan preferensi pengguna berdasarkan genre.
+    - Mengevaluasi kinerja model menggunakan metrik yang relevan.
+
+4. Solusi yang diterapkan, termasuk penggunaan representasi fitur dengan `TfidfVectorizer`, penghitungan kesamaan menggunakan `cosine similarity`, dan penerapan `Top-N recommendations`, memberikan dampak signifikan terhadap performa model. Evaluasi model menunjukkan bahwa sistem rekomendasi mampu memberikan rekomendasi yang relevan dan sesuai dengan preferensi pengguna, mendukung pengalaman mendengarkan musik yang lebih personal dan tepat sasaran.
 
 ## Conclusion
-Pengembangan model machine learning untuk rekomendasi musik atau lagu menggunakan algoritma Content Based Filtering melalui beberapa tahapan yang bersifat iteratif. Tahapan tersebut dimulai dari pemahaman bisnis (business understanding), pemahaman data (data understanding), hingga proses pemodelan (modelling) dan evaluasi (evaluation). Dalam proyek ini, metrik evaluasi yang digunakan adalah precision, yang dipilih berdasarkan konteks data, rumusan masalah, dan solusi yang diterapkan. Precision digunakan untuk mengukur seberapa akurat prediksi atau rekomendasi yang diberikan oleh model.
+Pengembangan model machine learning untuk rekomendasi musik atau lagu menggunakan algoritma `Content Based Filtering` melalui beberapa tahapan yang bersifat iteratif. Tahapan tersebut dimulai dari pemahaman bisnis (*business understanding*), pemahaman data (*data understanding*), hingga proses pemodelan (*modelling*) dan evaluasi (*evaluation*). Dalam proyek ini, metrik evaluasi yang digunakan adalah precision, yang dipilih berdasarkan konteks data, rumusan masalah, dan solusi yang diterapkan. Precision digunakan untuk mengukur seberapa akurat prediksi atau rekomendasi yang diberikan oleh model.
 
 Setelah melalui tahapan evaluasi, model rekomendasi musik berdasarkan genre menunjukkan hasil yang memuaskan, dengan nilai precision mencapai 100%. Model ini, yang dikembangkan dengan algoritma `Content Based Filtering`, dinilai berhasil menjawab pertanyaan-pertanyaan masalah yang telah dirumuskan serta mencapai tujuan proyek. Dengan adanya model ini, diharapkan sistem rekomendasi musik berdasarkan genre dapat membantu layanan aplikasi musik online memberikan rekomendasi yang lebih relevan kepada penggunanya.
