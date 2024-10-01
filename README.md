@@ -40,6 +40,7 @@ Untuk mencapai tujuan yang ditetapkan, penelitian ini mengadopsi beberapa langka
 </p>
 
 Dataset yang digunakan dalam proyek machine learning ini merupakan dataset anemia yang terdiri dari 2000 entri data atau record. Dataset ini bersifat open-source, yang berarti tersedia secara bebas untuk digunakan oleh publik, dan telah dipublikasikan oleh Mark Korveha melalui platform Kaggle dengan judul [Top Hits Spotify from 2000-2019](https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019). Dataset ini berisi statistik audio dari 2000 lagu teratas di Spotify yang dirilis antara tahun 2000 hingga 2019. Dalam dataset ini, terdapat sekitar 18 kolom yang masing-masing memberikan informasi detail mengenai lagu-lagu tersebut serta berbagai karakteristiknya. Setiap kolom dirancang untuk menjelaskan aspek tertentu dari lagu, mulai dari durasi, genre, popularitas, hingga fitur-fitur teknis lainnya yang mencakup elemen musik seperti tempo, kunci, dan tingkat energi.
+
 Statistik audio yang terdapat dalam dataset ini sangat berguna bagi para peneliti, pengembang, dan analis musik, karena memungkinkan mereka untuk mengeksplorasi dan memahami tren dalam industri musik selama dua dekade terakhir. Dengan data ini, pengguna dapat melakukan analisis mendalam mengenai bagaimana kualitas audio, genre, dan elemen lainnya berkontribusi pada popularitas suatu lagu. Selain itu, dataset ini juga dapat digunakan sebagai basis untuk membangun model machine learning yang dapat memberikan rekomendasi musik, sehingga meningkatkan pengalaman pengguna dalam menemukan lagu-lagu baru yang sesuai dengan preferensi mereka.
 
 **Variabel-variabel pada Spotify dataset adalah sebagai berikut:**
@@ -63,15 +64,36 @@ Statistik audio yang terdapat dalam dataset ini sangat berguna bagi para penelit
 - **genre**: Genre dari lagu tersebut.
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+Persiapan data adalah tahap penting dalam mengolah data mentah menjadi format yang sesuai untuk analisis atau pemrosesan lebih lanjut. Dalam proyek ini, beberapa teknik dan metode yang diterapkan dalam proses persiapan data adalah sebagai berikut:
+
+1. **Handling Missing Value**
+Nilai yang hilang adalah salah satu tantangan umum dalam analisis data di industri. Permasalahan ini muncul ketika terdapat data yang tidak lengkap, yang sering kali direpresentasikan sebagai nilai NaN di dalam pustaka pandas. Penyebabnya bisa beragam, termasuk kesalahan manusia, isu privasi, serta masalah saat melakukan penggabungan data. Tujuan dari langkah ini adalah untuk memastikan bahwa data yang digunakan dalam analisis atau pemodelan memiliki akurasi dan keandalan yang tinggi. Nilai yang hilang dapat menyebabkan bias serta kesalahan dalam analisis, sehingga penting untuk mengidentifikasi dan menangani masalah ini agar hasil analisis menjadi lebih akurat dan dapat dipercaya.
+
+2. **Handling Dupluicated Data**
+Data duplikat juga merupakan masalah yang sering ditemui dalam industri. Masalah ini terjadi ketika terdapat observasi yang memiliki nilai yang persis sama di setiap kolomnya. Langkah ini bertujuan untuk menjaga integritas data. Kehadiran data duplikat dapat mempengaruhi hasil analisis dan menghasilkan informasi yang tidak akurat. Oleh karena itu, penting untuk mengidentifikasi dan menghapus data yang terduplikasi agar data yang digunakan dalam analisis atau pemodelan tetap valid dan representatif. Salah satu teknik yang dapat diterapkan untuk mengatasi masalah ini adalah dengan menghapus data yang terduplikasi.
+
+3. **Feature Engineering**
+Merupakan proses untuk mengembangkan dan memilih atribut atau fitur yang akan digunakan dalam analisis data atau dalam pembuatan model *machine learning*. Dalam proyek ini, tahap rekayasa fitur dilakukan pada kolom genre. Terdapat beberapa entri dalam kolom genre yang memiliki lebih dari satu genre. Oleh karena itu, perlu dilakukan penanganan dengan memilih genre dari kategori pertama. Hal ini bertujuan untuk memudahkan pengembangan model dan memastikan model yang dihasilkan memiliki performa yang baik.
+
 ## Modeling
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
+Pada proyek ini, pendekatan yang dipakai untuk mengembangkan model dalam sistem rekomendasi adalah `Content-Based Filtering`.
+
+### Content Based Filtering
+Content Based Filtering adalah metode yang digunakan dalam sistem rekomendasi dan analisis data dengan fokus pada karakteristik atau konten dari item yang ingin direkomendasikan atau dianalisis. Pendekatan ini memanfaatkan atribut atau fitur dari item untuk menentukan kesamaan antara item yang ada dan preferensi pengguna. Dengan kata lain, sistem ini merekomendasikan item berdasarkan kesamaan antara konten item yang sudah diketahui pengguna dan konten item yang akan direkomendasikan.
+
+<p align='center'><img src="https://github.com/SyarifulMsth/Spotify-Music-Recommendation-System-/blob/main/images/content_based_filltering.png?raw=true"  width="500"></p>
+
+<div align="center">
+
+| **Kelebihan**                                 | **Kekurangan**                                 |
+|-----------------------------------------------|------------------------------------------------|
+| Personalisasi yang Tinggi                     | Keterbatasan dalam Variasi Rekomendasi         |
+| Transparansi dalam Rekomendasi                | Ketergantungan pada Kualitas Fitur             |
+| Kemampuan untuk Beradaptasi                   | Masalah Overspecialization                     |
+| Kemandirian dari Data Pengguna Lain           | Keterbatasan dalam Memahami Konteks Sosial     |
+
+</div>
+
 ## Evaluation
 Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
 Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
