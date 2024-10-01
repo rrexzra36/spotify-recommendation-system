@@ -170,7 +170,7 @@ Pada tahap ini, fungsi `recommend_song` dibuat dengan menggunakan argpartition. 
 ### Output
 Proses pengembangan model machine learning untuk rekomendasi musik atau lagu telah berhasil diselesaikan. Langkah berikutnya adalah memeriksa hasil rekomendasi yang dihasilkan oleh model tersebut.
 
-Pada kasus ini, akan dilakukan pencarian lagu-lagu yang serupa dengan lagu **"Excuse Me Miss"** milik **JAY-Z**, yang memiliki genre Pop.
+Pada kasus ini, akan dilakukan pencarian lagu-lagu yang serupa dengan lagu **"Excuse Me Miss"** milik **JAY-Z**, yang memiliki genre Hip-Hop.
 
 <div align="center">
     <strong>Tabel 2.</strong> Informasi musik atau lagu untuk uji coba
