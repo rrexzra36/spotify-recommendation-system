@@ -92,7 +92,7 @@ Visualisasi korelasi matriks fitur dalam konteks sistem rekomendasi musik, terli
 4. **Outlier & Distribution Analysis**
 
 <p align="center">
-  <img src="asd" />
+  <img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/distribution-and-outlier.png" />
 </p>
 
 Dari hasil analisis distribusi dan deteksi outlier, dapat disimpulkan bahwa sebagian besar fitur dalam dataset memiliki distribusi yang seimbang, dengan rentang nilai yang tidak terlalu ekstrem. Namun, terdapat beberapa fitur yang menunjukkan keberadaan outlier yang signifikan, seperti durasi, popularitas, speechiness, dan instrumentalness. Hal ini mengindikasikan adanya variasi yang cukup tinggi di beberapa lagu, terutama terkait elemen popularitas, vokal, dan instrumental. Secara umum, distribusi fitur seperti danceability, energy, tempo, dan valence menunjukkan variasi yang lebih terkendali. Adanya outlier ini penting untuk dipertimbangkan, terutama jika analisis lanjutan seperti modeling atau clustering dilakukan, karena dapat mempengaruhi hasil dan interpretasi lebih lanjut.
@@ -146,25 +146,25 @@ Pada tahap sebelumnya, data telah melalui proses pembersihan, dan langkah beriku
 2. **TF-IDF Vectorizer**
 Proses term frequency-inverse document frequency (`TF-IDF`) digunakan untuk mengidentifikasi representasi kata-kata penting dalam kolom genre. Dalam proyek ini, proses vektorisasi dilakukan menggunakan fungsi `TfidfVectorizer()` yang tersedia di library scikit-learn. Berikut adalah hasil `TF-IDF` dalam bentuk matriks, di mana matriks tersebut memperlihatkan hubungan antara musik dan genre yang terkait.
 <p align='center'>
-<img src="asd"  width="500">
+<img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/tf-idf.png"  width="800">
 </p>
 
 3. **Perhitungan Derajat Kesamaan (`Cosine Similarity`)**
 Di tahap ini, dilakukan penghitungan derajat kesamaan menggunakan fungsi `cosine_similarity` pada dataframe `tfidf_matrix` yang telah diperoleh sebelumnya. Proses ini bertujuan untuk menghitung kesamaan (*similarity*) antara musik atau lagu berdasarkan genre.
 <p align='center'>
-<img src="asd"  width="500">
+<img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/cosine-similarity.png"  width="800">
 </p>
 
 4. **Create Custom Functions**
 Langkah terakhir adalah membangun fungsi kustom untuk menghasilkan rekomendasi berdasarkan data input yang diinginkan. Fungsi ini bekerja dengan mengambil nilai similarity dari musik yang ingin dicari, kemudian memasukkan musik yang paling mirip ke dalam variabel closest. Parameter `N` ditentukan untuk menghasilkan `top-N recommendation` berdasarkan tingkat kesamaan tertinggi. Musik yang dicari akan dihapus dari daftar agar tidak muncul dalam rekomendasi. Pada langkah akhir, return digunakan untuk mengembalikan hasil rekomendasi dalam bentuk dataframe, di mana nilai yang dikembalikan adalah judul-judul musik berdasarkan tingkat similarity.
 <p align='center'>
-<img src="asd"  width="500">
+<img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/custom-functions.png"  width="800">
 </p>
 
 5. **Pembuatan Rekomendasi Musik atau Lagu**
 Pada tahap ini, fungsi `recommend_song` dibuat dengan menggunakan argpartition. Fungsi ini mengambil sejumlah nilai k tertinggi dari data kesamaan (dalam proyek ini: `cosine_sim_df`). Selanjutnya, data diurutkan dari tingkat kesamaan tertinggi hingga terendah dan dimasukkan ke dalam variabel closest. Untuk memastikan bahwa lagu yang dicari tidak muncul dalam daftar rekomendasi, lagu tersebut dihapus dari hasil akhir.
 <p align='center'>
-<img src="asd"  width="500">
+<img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/recommendations.png"  width="800">
 </p>
 
 ### Output
