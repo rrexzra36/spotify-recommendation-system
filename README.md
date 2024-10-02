@@ -206,19 +206,19 @@ Pada kasus ini, akan dilakukan pencarian lagu-lagu yang serupa dengan lagu **"Ex
 ### Perhitungan Evaluasi
 Proyek machine learning ini memanfaatkan algoritma `Content Based Filtering`, dan untuk evaluasi performa model, metrik yang digunakan adalah Precision. Precision mengukur seberapa relevan rekomendasi yang diberikan oleh model dan dapat dinyatakan dengan rumus sebagai berikut:
 
-\[
-\text{Precision} = \frac{r}{i}
-\]
+<p align='center'>
+<img src="https://latex.codecogs.com/svg.image?&space;Precision=\frac{r}{i}">
+</p>
 
 Di mana:
-- \(( r )\) adalah jumlah rekomendasi yang relevan.
-- \(( i )\) adalah total rekomendasi yang diberikan.
+- <img src="https://latex.codecogs.com/svg.image?(r)"> adalah jumlah rekomendasi yang relevan.
+- <img src="https://latex.codecogs.com/svg.image?(i)"> adalah total rekomendasi yang diberikan.
 
 Berdasarkan pengujian yang dilakukan di bagian Hasil, diperoleh 5 rekomendasi lagu berdasarkan genre. Jika dilakukan perhitungan dengan rumus di atas, maka nilai Precision yang dihasilkan adalah:
 
-\[
-\text{Precision} = \frac{5}{5} = 100\%
-\]
+<p align='center'>
+  <img src="https://latex.codecogs.com/svg.image?&space;Precision=\frac{5}{5}=100%">
+</p>
 
 ### Hasil Evluasi:
 1. Algoritma `content-based filtering` dengan `TfidfVectorizer` dan `cosine similarity` merupakan pendekatan paling efektif dalam proyek ini, dengan kemampuan untuk memberikan rekomendasi musik berdasarkan genre yang diinginkan oleh pengguna.
