@@ -207,7 +207,7 @@ Pada kasus ini, akan dilakukan pencarian lagu-lagu yang serupa dengan lagu **"Ex
 Proyek machine learning ini memanfaatkan algoritma `Content Based Filtering`, dan untuk evaluasi performa model, metrik yang digunakan adalah Precision. Precision mengukur seberapa relevan rekomendasi yang diberikan oleh model dan dapat dinyatakan dengan rumus sebagai berikut:
 
 <p align='center'>
-<img src="https://latex.codecogs.com/svg.image?&space;Precision=\frac{r}{i}">
+<img src="https://latex.codecogs.com/svg.image?{\color{White}Precision=\frac{r}{i}}">
 </p>
 
 Di mana:
@@ -217,7 +217,7 @@ Di mana:
 Berdasarkan pengujian yang dilakukan di bagian Hasil, diperoleh 5 rekomendasi lagu berdasarkan genre. Jika dilakukan perhitungan dengan rumus di atas, maka nilai Precision yang dihasilkan adalah:
 
 <p align='center'>
-  <img style src="https://latex.codecogs.com/svg.image?&space;Precision=\frac{5}{5}=100%">
+  <img style src="https://latex.codecogs.com/svg.image?{\color{White}Precision=\frac{5}{5}=100%}">
 </p>
 
 ### Hasil Evluasi:
