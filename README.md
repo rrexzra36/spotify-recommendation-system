@@ -64,38 +64,35 @@ Statistik audio yang terdapat dalam dataset ini sangat berguna bagi para penelit
 - **genre**: Genre dari lagu tersebut.
 
 ### Hasil Visualiasi dan Analisis Data
-1. **Univariate Analysis**
+1. **Pengecekan Duplikasi Data**
+Pada tahap pembersihan data, teridentifikasi adanya 59 entri duplikat dalam dataset yang digunakan. Duplikasi ini harus dihapus untuk memastikan keakuratan model dalam melakukan prediksi. Meskipun jumlah duplikat cukup signifikan, dataset tetap dapat digunakan karena masih tersedia 1941 entri yang valid, yang dianggap cukup memadai untuk analisis lebih lanjut.
 
+
+1. **Univariate Analysis**
+Visualisasi data menunjukkan bahwa jumlah lagu per tahun meningkat tajam dari tahun 1999 hingga mencapai puncaknya pada tahun 2001. Setelah itu, jumlah lagu yang dirilis per tahun relatif stabil antara 80 hingga 100 lagu dari tahun 2002 hingga 2017. Setelah 2017, terlihat sedikit penurunan, dengan penurunan drastis pada tahun 2020, yang mencatat jumlah lagu paling sedikit sepanjang periode yang ditampilkan.
 <p align="center">
   <img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/uni_analysis.png" />
 </p>
 
-Visualisasi data menunjukkan bahwa jumlah lagu per tahun meningkat tajam dari tahun 1999 hingga mencapai puncaknya pada tahun 2001. Setelah itu, jumlah lagu yang dirilis per tahun relatif stabil antara 80 hingga 100 lagu dari tahun 2002 hingga 2017. Setelah 2017, terlihat sedikit penurunan, dengan penurunan drastis pada tahun 2020, yang mencatat jumlah lagu paling sedikit sepanjang periode yang ditampilkan.
-
 2. **Bivariate Analysis**
-
+Visualisasi ini menunjukkan bahwa tidak terdapat hubungan yang kuat antara popularitas lagu dengan fitur audio seperti danceability, energy, dan tempo. Sebagian besar lagu, terlepas dari variasi dalam fitur-fitur tersebut, memiliki tingkat popularitas yang serupa, berkisar antara 40 hingga 80. Oleh karena itu, fitur-fitur audio ini mungkin tidak cukup untuk memprediksi popularitas lagu secara akurat dalam sistem rekomendasi. Pendekatan yang lebih efektif mungkin memerlukan penggunaan faktor lain, seperti preferensi pengguna, lirik, atau metadata lainnya, untuk meningkatkan relevansi rekomendasi.
 <p align="center">
   <img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/bivar_analysis.png" />
 </p>
 
-Visualisasi ini menunjukkan bahwa tidak terdapat hubungan yang kuat antara popularitas lagu dengan fitur audio seperti danceability, energy, dan tempo. Sebagian besar lagu, terlepas dari variasi dalam fitur-fitur tersebut, memiliki tingkat popularitas yang serupa, berkisar antara 40 hingga 80. Oleh karena itu, fitur-fitur audio ini mungkin tidak cukup untuk memprediksi popularitas lagu secara akurat dalam sistem rekomendasi. Pendekatan yang lebih efektif mungkin memerlukan penggunaan faktor lain, seperti preferensi pengguna, lirik, atau metadata lainnya, untuk meningkatkan relevansi rekomendasi.
-
-
 3. **Multivariate Analysis**
+Visualisasi korelasi matriks fitur dalam konteks sistem rekomendasi musik, terlihat bahwa fitur seperti energy dan loudness memiliki korelasi positif kuat, menunjukkan lagu energik cenderung lebih keras. Sebaliknya, ada korelasi negatif antara acousticness dan energy, sehingga lagu akustik cenderung memiliki energi rendah. Selain itu, lagu yang lebih ceria (valence) sering kali lebih mudah untuk menari (danceability). Korelasi ini membantu sistem rekomendasi musik dalam menyesuaikan lagu berdasarkan preferensi pengguna, seperti memilih lagu energik atau ceria yang cocok untuk suasana tertentu.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/multi_analysis.png" />
 </p>
 
-Visualisasi korelasi matriks fitur dalam konteks sistem rekomendasi musik, terlihat bahwa fitur seperti energy dan loudness memiliki korelasi positif kuat, menunjukkan lagu energik cenderung lebih keras. Sebaliknya, ada korelasi negatif antara acousticness dan energy, sehingga lagu akustik cenderung memiliki energi rendah. Selain itu, lagu yang lebih ceria (valence) sering kali lebih mudah untuk menari (danceability). Korelasi ini membantu sistem rekomendasi musik dalam menyesuaikan lagu berdasarkan preferensi pengguna, seperti memilih lagu energik atau ceria yang cocok untuk suasana tertentu.
-
 4. **Outlier & Distribution Analysis**
+Dari hasil analisis distribusi dan deteksi outlier, dapat disimpulkan bahwa sebagian besar fitur dalam dataset memiliki distribusi yang seimbang, dengan rentang nilai yang tidak terlalu ekstrem. Namun, terdapat beberapa fitur yang menunjukkan keberadaan outlier yang signifikan, seperti durasi, popularitas, speechiness, dan instrumentalness. Hal ini mengindikasikan adanya variasi yang cukup tinggi di beberapa lagu, terutama terkait elemen popularitas, vokal, dan instrumental. Secara umum, distribusi fitur seperti danceability, energy, tempo, dan valence menunjukkan variasi yang lebih terkendali. Adanya outlier ini penting untuk dipertimbangkan, terutama jika analisis lanjutan seperti modeling atau clustering dilakukan, karena dapat mempengaruhi hasil dan interpretasi lebih lanjut.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/distribution-and-outlier.png" />
 </p>
-
-Dari hasil analisis distribusi dan deteksi outlier, dapat disimpulkan bahwa sebagian besar fitur dalam dataset memiliki distribusi yang seimbang, dengan rentang nilai yang tidak terlalu ekstrem. Namun, terdapat beberapa fitur yang menunjukkan keberadaan outlier yang signifikan, seperti durasi, popularitas, speechiness, dan instrumentalness. Hal ini mengindikasikan adanya variasi yang cukup tinggi di beberapa lagu, terutama terkait elemen popularitas, vokal, dan instrumental. Secara umum, distribusi fitur seperti danceability, energy, tempo, dan valence menunjukkan variasi yang lebih terkendali. Adanya outlier ini penting untuk dipertimbangkan, terutama jika analisis lanjutan seperti modeling atau clustering dilakukan, karena dapat mempengaruhi hasil dan interpretasi lebih lanjut.
 
 ## Data Preparation
 Persiapan data adalah tahap penting dalam mengolah data mentah menjadi format yang sesuai untuk analisis atau pemrosesan lebih lanjut. Dalam proyek ini, beberapa teknik dan metode yang diterapkan dalam proses persiapan data adalah sebagai berikut:
