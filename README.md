@@ -211,13 +211,13 @@ Proyek machine learning ini memanfaatkan algoritma `Content Based Filtering`, da
 </p>
 
 Di mana:
-- <img src="https://latex.codecogs.com/svg.image?(r)"> adalah jumlah rekomendasi yang relevan.
-- <img src="https://latex.codecogs.com/svg.image?(i)"> adalah total rekomendasi yang diberikan.
+- <img src="https://latex.codecogs.com/svg.image?{\color{white}(r)}"> adalah jumlah rekomendasi yang relevan.
+- <img src="https://latex.codecogs.com/svg.image?{\color{white}(i)}"> adalah total rekomendasi yang diberikan.
 
 Berdasarkan pengujian yang dilakukan di bagian Hasil, diperoleh 5 rekomendasi lagu berdasarkan genre. Jika dilakukan perhitungan dengan rumus di atas, maka nilai Precision yang dihasilkan adalah:
 
 <p align='center'>
-  <img src="https://latex.codecogs.com/svg.image?&space;Precision=\frac{5}{5}=100%">
+  <img style src="https://latex.codecogs.com/svg.image?&space;Precision=\frac{5}{5}=100%">
 </p>
 
 ### Hasil Evluasi:
