@@ -84,6 +84,8 @@ df.describe(include='all').transpose()
 
 """Dataset ini terdiri dari berbagai kolom, seperti artist, song, duration_ms, explicit, year, popularity, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, dan genre. Kolom artist dan song menampilkan nama artis serta judul lagu, di mana artis yang paling sering muncul adalah Drake (23 kali) dan lagu yang paling sering muncul adalah "Sorry" (4 kali). Kolom explicit menunjukkan apakah lagu mengandung konten eksplisit, dengan mayoritas (1404 entri) tidak eksplisit. Genre paling dominan adalah "pop" dengan 416 lagu.
 
+Pada tahap pembersihan data, teridentifikasi adanya **59 entri duplikat** dalam dataset yang digunakan. Duplikasi ini harus dihapus untuk memastikan keakuratan model dalam melakukan prediksi. Meskipun jumlah duplikat cukup signifikan, dataset tetap dapat digunakan karena masih tersedia **1941 entri yang valid**, yang dianggap cukup memadai untuk analisis lebih lanjut.
+
 Setelah itu, fungsi `describe()` digunakan untuk memberikan ringkasan statistik yang mencakup informasi terkait tendensi sentral, distribusi, serta jangkauan data dalam dataset. Pada beberapa kolom, seperti mean, std, dan min, terdapat nilai NaN (Not a Number), terutama untuk kolom artist, song, dan explicit. Hal ini disebabkan karena kolom-kolom tersebut berisi data object, bukan data numerik. Nilai NaN muncul karena fungsi deskriptif seperti mean, standar deviasi, dan lainnya tidak relevan untuk data non-numerik. Oleh karena itu, statistik seperti rata-rata dan deviasi standar tidak dapat dihitung untuk kolom yang berisi teks atau boolean. Sehingga perlu dikonversi ke tipe data kategorikal guna memfasilitasi proses Exploratory Data Analysis (EDA).
 
 ## C. Eploratory Data Analysis (EDA)
@@ -101,6 +103,8 @@ plt.ylabel('Count')
 plt.title('Distribution of Songs by Year')
 plt.xticks(rotation=45)
 plt.show()
+
+"""Visualisasi ini menunjukkan bahwa tidak terdapat hubungan yang kuat antara popularitas lagu dengan fitur audio seperti danceability, energy, dan tempo. Sebagian besar lagu, terlepas dari variasi dalam fitur-fitur tersebut, memiliki tingkat popularitas yang serupa, berkisar antara 40 hingga 80. Oleh karena itu, fitur-fitur audio ini mungkin tidak cukup untuk memprediksi popularitas lagu secara akurat dalam sistem rekomendasi. Pendekatan yang lebih efektif mungkin memerlukan penggunaan faktor lain, seperti preferensi pengguna, lirik, atau metadata lainnya, untuk meningkatkan relevansi rekomendasi."""
 
 # Mengurutkan dan mengambil 10 artis teratas berdasarkan popularitas
 top_artists_popularity = df.sort_values(by='popularity', ascending=False).head(10)
@@ -129,7 +133,10 @@ for i in plot.patches:
 plt.tight_layout()
 plt.show()
 
-"""### Bivariate Analysis"""
+"""Grafik ini menampilkan 10 artis terpopuler berdasarkan skor popularitas. The Neighbourhood menempati posisi pertama dengan skor 87.0, diikuti oleh Tom Odell dengan skor 88.0, dan Eminem di posisi ketiga dengan 86.5. Billie Eilish dan WILLOW memiliki skor yang sama, yaitu 86.0, sementara Post Malone, Bruno Mars, dan Ed Sheeran memiliki skor 85.0. Perbedaan skor antara artis-artis ini sangat tipis, menunjukkan bahwa mereka semua berada pada tingkat popularitas yang hampir seimbang.
+
+### Bivariate Analysis
+"""
 
 sns.set(style="whitegrid")
 
@@ -155,7 +162,10 @@ plt.suptitle('Bivariate Analysis: Popularity vs Audio Features', size=16)
 plt.tight_layout()
 plt.show()
 
-"""### Multivariate Analysis"""
+"""Visualisasi ini menunjukkan bahwa tidak terdapat hubungan yang kuat antara popularitas lagu dengan fitur audio seperti danceability, energy, dan tempo. Sebagian besar lagu, terlepas dari variasi dalam fitur-fitur tersebut, memiliki tingkat popularitas yang serupa, berkisar antara 40 hingga 80. Oleh karena itu, fitur-fitur audio ini mungkin tidak cukup untuk memprediksi popularitas lagu secara akurat dalam sistem rekomendasi. Pendekatan yang lebih efektif mungkin memerlukan penggunaan faktor lain, seperti preferensi pengguna, lirik, atau metadata lainnya, untuk meningkatkan relevansi rekomendasi.
+
+### Multivariate Analysis
+"""
 
 # Analisis Multivariate: Korelasi matriks
 plt.figure(figsize=(12, 8))
@@ -168,7 +178,10 @@ sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
 plt.title('Multivariate Analysis: Correlation Matrix of Features', size=16)
 plt.show()
 
-"""### Outlier and Distribution Analysis"""
+"""Visualisasi korelasi matriks fitur dalam konteks sistem rekomendasi musik, terlihat bahwa fitur seperti energy dan loudness memiliki korelasi positif kuat, menunjukkan lagu energik cenderung lebih keras. Sebaliknya, ada korelasi negatif antara acousticness dan energy, sehingga lagu akustik cenderung memiliki energi rendah. Selain itu, lagu yang lebih ceria (valence) sering kali lebih mudah untuk menari (danceability). Korelasi ini membantu sistem rekomendasi musik dalam menyesuaikan lagu berdasarkan preferensi pengguna, seperti memilih lagu energik atau ceria yang cocok untuk suasana tertentu.
+
+### Outlier and Distribution Analysis
+"""
 
 # Mengatur style visualisasi
 sns.set(style="whitegrid")

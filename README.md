@@ -65,7 +65,10 @@ Statistik audio yang terdapat dalam dataset ini sangat berguna bagi para penelit
 
 ### Hasil Visualiasi dan Analisis Data
 1. **Pengecekan Duplikasi Data**
-Pada tahap pembersihan data, teridentifikasi adanya 59 entri duplikat dalam dataset yang digunakan. Duplikasi ini harus dihapus untuk memastikan keakuratan model dalam melakukan prediksi. Meskipun jumlah duplikat cukup signifikan, dataset tetap dapat digunakan karena masih tersedia 1941 entri yang valid, yang dianggap cukup memadai untuk analisis lebih lanjut.
+Pada tahap pembersihan data, teridentifikasi adanya **59 entri duplikat** dalam dataset yang digunakan. Duplikasi ini harus dihapus untuk memastikan keakuratan model dalam melakukan prediksi. Meskipun jumlah duplikat cukup signifikan, dataset tetap dapat digunakan karena masih **tersedia 1941 entri yang valid**, yang dianggap cukup memadai untuk analisis lebih lanjut.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/rrexzra36/spotify-recommendation-system/refs/heads/main/images/duplicated.png" />
+</p>
 
 
 1. **Univariate Analysis**
